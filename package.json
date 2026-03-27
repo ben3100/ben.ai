@@ -1,0 +1,117 @@
+{
+  "name": "ben-ai",
+  "displayName": "Ben.AI — Multi-Agent Coding Assistant",
+  "description": "Multi-agent VS Code extension that generates, modifies and maintains a complete software project automatically.",
+  "version": "0.1.0",
+  "publisher": "ben-belaouedj",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": ["AI", "Other"],
+  "activationEvents": ["onStartupFinished"],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "ben-ai.chat",
+        "title": "Ben.AI: Chat"
+      },
+      {
+        "command": "ben-ai.edit",
+        "title": "Ben.AI: Edit Active File"
+      },
+      {
+        "command": "ben-ai.buildProject",
+        "title": "Ben.AI: Build Project"
+      },
+      {
+        "command": "ben-ai.setApiKey",
+        "title": "Ben.AI: Set API Key"
+      },
+      {
+        "command": "ben-ai.showPanel",
+        "title": "Ben.AI: Open Panel"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "ben-ai-sidebar",
+          "title": "Ben.AI",
+          "icon": "media/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "ben-ai-sidebar": [
+        {
+          "type": "webview",
+          "id": "ben-ai.sidebarView",
+          "name": "Ben.AI"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Ben.AI",
+      "properties": {
+        "ben-ai.provider": {
+          "type": "string",
+          "default": "ollama",
+          "enum": ["ollama", "openai", "anthropic"],
+          "description": "Default AI provider"
+        },
+        "ben-ai.ollamaUrl": {
+          "type": "string",
+          "default": "http://localhost:11434",
+          "description": "Ollama server URL"
+        },
+        "ben-ai.ollamaModel": {
+          "type": "string",
+          "default": "codellama",
+          "description": "Default Ollama model"
+        },
+        "ben-ai.openaiModel": {
+          "type": "string",
+          "default": "gpt-4o-mini",
+          "description": "Default OpenAI model"
+        },
+        "ben-ai.anthropicModel": {
+          "type": "string",
+          "default": "claude-3-haiku-20240307",
+          "description": "Default Anthropic model"
+        },
+        "ben-ai.allowedCommands": {
+          "type": "array",
+          "default": ["npm", "npx", "yarn", "pnpm", "node", "python3", "pip", "git", "tsc", "cargo", "go"],
+          "description": "Whitelisted terminal commands"
+        },
+        "ben-ai.confirmBeforeDelete": {
+          "type": "boolean",
+          "default": true,
+          "description": "Ask confirmation before deleting files"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "webpack",
+    "watch": "webpack --watch",
+    "package": "webpack --mode production --devtool hidden-source-map",
+    "lint": "eslint src --ext ts"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.85.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.0.0",
+    "ts-loader": "^9.0.0",
+    "typescript": "^5.0.0",
+    "webpack": "^5.0.0",
+    "webpack-cli": "^5.0.0"
+  },
+  "dependencies": {
+    "node-fetch": "^3.3.2"
+  }
+}
