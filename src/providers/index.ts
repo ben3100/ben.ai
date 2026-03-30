@@ -3,3 +3,4 @@ export { OllamaProvider } from './ollama';
 export { OpenAIProvider } from './openai';
 export { AnthropicProvider } from './anthropic';
 export { ProviderRouter } from './router';
+export type { TaskType } from './router';
