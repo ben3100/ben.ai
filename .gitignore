@@ -1,8 +1,4 @@
 node_modules/
-dist/
-*.vsix
 .DS_Store
--e 
-# Environment files
 *.env
 *.env.*
